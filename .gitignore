@@ -1,0 +1,7 @@
+/.metadata
+/RemoteSystemsTempFiles
+*.elf
+*.lss
+*.lst
+*.sym
+*.hex
