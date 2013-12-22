@@ -33,8 +33,8 @@ void snes_set_data_clock_to_low(void) {
 uint8_t snes_read_button(void) {
 	uint8_t val;
 	snes_set_data_clock_to_high();
-	val = read_pinf(PORTF4);
 	_delay_us(12);
+	val = read_pinf(PORTF4);
 	snes_set_data_clock_to_low();
 	return val;
 }
@@ -65,13 +65,14 @@ void snes_read_buttons(void) {
 }
 
 void snes_setup_pins_for_readout(void) {
+
 	set_pinf_to_output(PORTF0);
 	set_pinf_to_output(PORTF1);
 	set_pinf_to_input(PORTF4);
 
 	set_output_pinf_to_high(PORTF0);
 	set_output_pinf_to_high(PORTF1);
-	set_intput_pinf_to_pull_up(PORTF4);
+	//set_intput_pinf_to_pull_up(PORTF4);
 }
 
 

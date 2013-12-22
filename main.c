@@ -60,8 +60,12 @@ void print_status(uint8_t index) {
 		phex(0);
 }
 
+unsigned int print_count=0;
+
 void snes_print_buttons_status(void) {
-	print("Status ");
+	print_count++;
+	phex16(print_count);
+	print(" Status ");
 
 	print("B=");
 	print_status(SNES_BUTTON_B);
@@ -90,7 +94,7 @@ void snes_print_buttons_status(void) {
 	print("\n");
 }
 
-#define circular_counter_size 10
+#define circular_counter_size 60
 
 int main(void) {
 	uint8_t print_circular_counter = 0;
