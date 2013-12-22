@@ -62,7 +62,7 @@ void print_status(uint8_t index) {
 
 unsigned int print_count=0;
 
-void snes_print_buttons_status(void) {
+void debug_snes_print_buttons_status(void) {
 	print_count++;
 	phex16(print_count);
 	print(" Status ");
@@ -106,14 +106,14 @@ int main(void) {
 
 	while (1) {
 		snes_read_buttons();
+
 		if (!print_circular_counter) {
-			snes_print_buttons_status();
+			debug_snes_print_buttons_status();
 		}
 		print_circular_counter++;
 		print_circular_counter = print_circular_counter % circular_counter_size;
 
-		_delay_ms(16);
-		_delay_us(466);
+
 	}
 }
 

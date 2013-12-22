@@ -65,6 +65,9 @@ void snes_read_buttons(void) {
 	snes_read_button();
 	snes_read_button();
 	snes_read_button();
+
+	_delay_ms(16);
+	_delay_us(466);
 }
 
 void snes_setup_pins_for_readout(void) {
