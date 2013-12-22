@@ -2,7 +2,7 @@
  * snes.c
  *
  *  Created on: 22 déc. 2013
- *      Author: Damaki
+ *      Author: Loic Lacombe
  */
 
 #include <avr/io.h>
@@ -12,6 +12,14 @@
 
 #include "../io_pin_utils.h"
 #include "snes.h"
+
+//private method
+void snes_set_data_latch_to_high(void);
+void snes_set_data_latch_to_low(void);
+void snes_set_data_clock_to_high(void);
+void snes_set_data_clock_to_low(void);
+uint8_t snes_read_button(void);
+extern uint8_t buttons_status[];
 
 
 void snes_set_data_latch_to_high(void) {

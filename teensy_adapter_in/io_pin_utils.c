@@ -2,7 +2,7 @@
  * io_pin_utils.c
  *
  *  Created on: 22 déc. 2013
- *      Author: Damaki
+ *      Author: Loic Lacombe
  */
 #include <avr/io.h>
 #include <avr/pgmspace.h>

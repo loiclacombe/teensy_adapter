@@ -2,7 +2,7 @@
  * io_pin_utils.h
  *
  *  Created on: 22 déc. 2013
- *      Author: Damaki
+ *      Author: Loic Lacombe
  */
 
 #ifndef IO_PIN_UTILS_H_

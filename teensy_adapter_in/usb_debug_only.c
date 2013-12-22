@@ -35,7 +35,7 @@
 
 // You can change these to give your code its own name.  On Windows,
 // these are only used before an INF file (driver install) is loaded.
-#define STR_MANUFACTURER	L"Damaki"
+#define STR_MANUFACTURER	L"Loic Lacombe"
 #define STR_PRODUCT		L"Pad converter"
 
 
