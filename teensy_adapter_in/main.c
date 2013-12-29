@@ -10,6 +10,7 @@
 #include "print.h"
 #include "io_pin_utils.h"
 #include "modules/snes.h"
+#include "common/gamepad_status.h"
 
 #define LED_CONFIG	(DDRD |= (1<<6))
 #define LED_ON		(PORTD &= ~(1<<6))
@@ -18,12 +19,6 @@
 
 #define ON 1
 #define OFF 0
-
-uint8_t buttons_status[] = {
-OFF, OFF, OFF, OFF,
-OFF, OFF, OFF, OFF,
-OFF, OFF, OFF, OFF,
-ON, ON, ON, ON };
 
 void set_cpu_to_16_mhz(void) {
 	// set for 16 MHz clock, and turn on the LED
@@ -53,14 +48,27 @@ void initialize(void) {
 	_delay_ms(1000);
 }
 
-void print_status(uint8_t index) {
-	if (buttons_status[index])
-		phex(1);
+void print_button_status(uint8_t index) {
+	if (gamepad_status.buttons_mask & button_mask(index))
+		print("1");
 	else
-		phex(0);
+		print("0");
 }
 
-unsigned int print_count=0;
+void print_axis_status(int8_t axis_data) {
+	if (axis_data < 0) {
+		axis_data = -axis_data;
+		print("-");
+	}
+	if(axis_data){
+		print("1");
+	}else{
+		print("0");
+	}
+
+}
+
+unsigned int print_count = 0;
 
 void debug_snes_print_buttons_status(void) {
 	print_count++;
@@ -68,29 +76,25 @@ void debug_snes_print_buttons_status(void) {
 	print(" Status ");
 
 	print("B=");
-	print_status(SNES_BUTTON_B);
+	print_button_status(SNES_BUTTON_B);
 	print(", Y=");
-	print_status(SNES_BUTTON_Y);
+	print_button_status(SNES_BUTTON_Y);
 	print(", SELECT=");
-	print_status(SNES_BUTTON_SELECT);
+	print_button_status(SNES_BUTTON_SELECT);
 	print(", START=");
-	print_status(SNES_BUTTON_START);
-	print(", UP=");
-	print_status(SNES_BUTTON_UP);
-	print(", DOWN=");
-	print_status(SNES_BUTTON_DOWN);
-	print(", LEFT=");
-	print_status(SNES_BUTTON_LEFT);
-	print(", RIGHT=");
-	print_status(SNES_BUTTON_RIGHT);
+	print_button_status(SNES_BUTTON_START);
+	print(", Y_AXIS=");
+	print_axis_status(gamepad_status.y_axis);
+	print(", X_AXIS=");
+	print_axis_status(gamepad_status.x_axis);
 	print(", A=");
-	print_status(SNES_BUTTON_A);
+	print_button_status(SNES_BUTTON_A);
 	print(", X=");
-	print_status(SNES_BUTTON_X);
+	print_button_status(SNES_BUTTON_X);
 	print(", L=");
-	print_status(SNES_BUTTON_L);
+	print_button_status(SNES_BUTTON_L);
 	print(", R=");
-	print_status(SNES_BUTTON_R);
+	print_button_status(SNES_BUTTON_R);
 	print("\n");
 }
 
@@ -112,7 +116,6 @@ int main(void) {
 		}
 		print_circular_counter++;
 		print_circular_counter = print_circular_counter % circular_counter_size;
-
 
 	}
 }

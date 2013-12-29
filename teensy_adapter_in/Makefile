@@ -48,6 +48,7 @@ TARGET =teensy_adapter_in
 SRC = print.c \
 	usb_debug_only.c \
 	modules/snes.c \
+	common/gamepad_status.c \
 	io_pin_utils.c \
 	main.c
 
