@@ -49,7 +49,7 @@ void initialize(void) {
 }
 
 void print_button_status(uint8_t index) {
-	if (gamepad_status.buttons_mask & button_mask(index))
+	if (gamepad_status.buttons & button_mask(index))
 		print("1");
 	else
 		print("0");

@@ -39,7 +39,7 @@ void snes_set_data_clock_to_low(void) {
 
 void snes_raw_read_button(uint8_t index) {
 	if (!read_pinf(PORTF4)) {
-		gamepad_status.buttons_mask |= button_mask(index);
+		gamepad_status.buttons |= button_mask(index);
 	}
 }
 
@@ -69,7 +69,7 @@ void snes_read_buttons(void) {
 	snes_set_data_latch_to_low();
 	_delay_us(6);
 
-	gamepad_status.buttons_mask = 0;
+	gamepad_status.buttons = 0;
 	gamepad_status.y_axis=0;
 	gamepad_status.x_axis=0;
 
