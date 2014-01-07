@@ -80,6 +80,7 @@ void megadrive_read_buttons(){
   megadrive_read_button(MEGADRIVE_BUTTON_START, MEGADRIVE_DATA_START_C_PIN);
   megadrive_read_button(MEGADRIVE_BUTTON_A, MEGADRIVE_DATA_A_B_PIN);
   digitalWrite(MEGADRIVE_SELECT_PIN, HIGH); 
+  //wait for next frame
   delay(16);
   delayMicroseconds(666);
 }
@@ -89,13 +90,13 @@ void megadrive_read_button(int button_index, int pin_index){
 }
 
 void megadrive_read_axis_y(int pin_index, int axis_value){
-  if(digitalRead(pin_index)){
+  if(!digitalRead(pin_index)){
     hat_direction = axis_value;
   }
 }
 
 void megadrive_read_axis_x(int pin_index, int direction){
-  if(digitalRead(pin_index)){
+  if(!digitalRead(pin_index)){
 
     if(hat_direction == HAT_DEFAULT){
       hat_direction = direction;
@@ -114,8 +115,6 @@ void megadrive_read_axis_x(int pin_index, int direction){
 
 void setup() {
   megadrive_read_buttons();
-
-  Serial.begin(9600);
 }
 
 void snes_read_button_raw(int button_index){
@@ -186,10 +185,9 @@ void snes_read_buttons(){
   snes_read_button(SNES_BUTTON_X);
   snes_read_button(SNES_BUTTON_L);
   snes_read_button(SNES_BUTTON_R);
-
+  //wait for next frame
   delay(16);
   delayMicroseconds(466); 
-  Serial.println(hat_direction, DEC);
 }
 
 void loop() {
